@@ -1,8 +1,14 @@
-# Laporan Proyek Machine Learning - Nama Anda
+# Laporan Proyek Machine Learning - Salma Fauziah Azzahra
 
 ## Project Overview
 
 Pada bagian ini, Kamu perlu menuliskan latar belakang yang relevan dengan proyek yang diangkat.
+
+Buku menurut Kamus Besar Bahasa Indonesia Balai Pustaka adalah lembar kertas yang berjilid, berisi tulisan atau kosong. Sedangkan menurut Oxford Dictionary, buku adalah hasil karya yang ditulis atau dicetak dengan halaman-halaman yang dijilid pada satu sisi atau hasil karya yang ditujukan untuk penerbitan. Buku yang dianggap berhasil jika dapat menggugah minat dari khalayak sasaran dalam memahami isi dari buku tersebut[1].
+
+Ketika selesai membaca suatu buku dan buku itu dianggap menarik dan menggugah selera baca, maka tak jarang jika pembaca ingin membaca buku serupa, baik dalam hal kesamaan genre ataupun oleh siapa buku tersebut ditulis. Oleh karena itu, untuk memudahkan para pembaca buku untuk mendapatkan buku serupa maka diperlukan sistem rekomendasi untuk memudahkan dalam proses pencarian. 
+
+Pengertian dari Sistem Rekomendasi sendiri adalah suatu _system_ yang digunakan oleh para user/customer/pelanggan untuk mendapatkan produk yang diinginkan[2]. Dengan banyaknya data yang tersebar, maka dengan adanya sistem rekomendasi ini dapat memperkecil ruang lingkup data sesuai dengan _history_ pengguna.
 
 **Rubrik/Kriteria Tambahan (Opsional)**:
 - Jelaskan mengapa proyek ini penting untuk diselesaikan.
@@ -73,8 +79,12 @@ Ingatlah, metrik evaluasi yang digunakan harus sesuai dengan konteks data, probl
 **Rubrik/Kriteria Tambahan (Opsional)**: 
 - Menjelaskan formula metrik dan bagaimana metrik tersebut bekerja.
 
-**---Ini adalah bagian akhir laporan---**
+# Conclusion
 
-_Catatan:_
-- _Anda dapat menambahkan gambar, kode, atau tabel ke dalam laporan jika diperlukan. Temukan caranya pada contoh dokumen markdown di situs editor [Dillinger](https://dillinger.io/), [Github Guides: Mastering markdown](https://guides.github.com/features/mastering-markdown/), atau sumber lain di internet. Semangat!_
-- Jika terdapat penjelasan yang harus menyertakan code snippet, tuliskan dengan sewajarnya. Tidak perlu menuliskan keseluruhan kode project, cukup bagian yang ingin dijelaskan saja.
+#REFERENCE
+
+[1] dosenpendidikan. (2022, Agustus 14). Pengertian Buku. Diakses dari https://www.dosenpendidikan.co.id/pengertian-buku/
+
+
+
+
