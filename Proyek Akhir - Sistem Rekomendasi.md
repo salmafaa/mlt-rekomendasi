@@ -84,6 +84,7 @@ Tabel 1. **Data books**
 
 
 ![Analyst-books](https://user-images.githubusercontent.com/109077279/200172546-b849fa59-f553-40cb-898a-735a84d232ff.png)
+
 Gambar 1. **Analisis dataset books**
 
 Pada Gambar 1, dapat dilihat jumlah entri unik dari setiap fitur pada dataset books. Terlihat bahwa banyaknya data penulis adalah 4664 dan banyaknya judul buku keseluruhan adalah 9964, artinya terdapat penulis yang menulis lebih dari satu buku.
@@ -126,8 +127,26 @@ Gambar 5. **Grafik rating**
 
 Pada Gambar 5, dapat dilihat bahwa pengguna paling banyak memberikan rating 4 pada buku, sesuai dengan jumlah dan presentase pada Gambar 4.
 
+### Data Prepocessing
+- Menggabungkan dataframe ratings dengan books berdasarkan nilai book_id ke dalam variable book
+- Mengecek missing value, terdapat missing value pada original_title dan language_code
+- Memasukkan ratings ke dalam variable all_books_rate
+- Menggabungkan all_books_rate dengan authors dan title berdasarkan book_id ke dalam variable all_books
+
 
 ## Data Preparation
+- Melakukan pengecekan missing value pada all_books menggunakan fungsi isnull()
+
+![cek-all_books](https://user-images.githubusercontent.com/109077279/200176337-73ab935c-3076-41f9-8222-da5142f852c8.png)
+
+Gambar 6. **Cek missing value pada all_books**
+
+Pada Gambar 6, terlihat bahwa tidak ada missing value pada setiap fitur.
+
+- 
+
+
+
 Pada bagian ini Anda menerapkan dan menyebutkan teknik data preparation yang dilakukan. Teknik yang digunakan pada notebook dan laporan harus berurutan.
 
 **Rubrik/Kriteria Tambahan (Opsional)**: 
