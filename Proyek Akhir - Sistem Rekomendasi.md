@@ -135,6 +135,9 @@ Pada Gambar 5, dapat dilihat bahwa pengguna paling banyak memberikan rating 4 pa
 
 
 ## Data Preparation
+
+### Data Preparation pada Content Based Filtering
+
 - Melakukan pengecekan missing value pada all_books menggunakan fungsi isnull()
 
 ![cek-all_books](https://user-images.githubusercontent.com/109077279/200176488-f4dc5592-2745-4335-81af-57ad8910ffa8.png)
@@ -209,7 +212,11 @@ Tabel 5. **books_new**
 | 9998 |  9999 | Cinderella Ate My Daughter: Dispatches from th... |             Peggy Orenstein |
 | 9999 | 10000 |                               The First World War |                 John Keegan |
 
+### Data Preparation pada Collaborative Filtering
 
+- Menyandikan (encode) fitur 'user_id' dan 'book_id' ke dalam indeks integer.
+- Memetakan 'user_id' dan 'book_id' ke dataframe yang berkaitan.
+- Mengecek jumlah user, jumlah buku, kemudian mengubah nilai rating menjadi float.
 
 ## Modeling
 Tahapan ini membahas mengenai model sisten rekomendasi yang Anda buat untuk menyelesaikan permasalahan. Sajikan top-N recommendation sebagai output.
@@ -229,7 +236,7 @@ Ingatlah, metrik evaluasi yang digunakan harus sesuai dengan konteks data, probl
 # Conclusion
 
 
-#REFERENCE
+# REFERENCE
 
 [1] dosenpendidikan. (2022, Agustus 14). Pengertian Buku. Diakses dari https://www.dosenpendidikan.co.id/pengertian-buku/
 
