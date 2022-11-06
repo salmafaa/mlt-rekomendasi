@@ -137,21 +137,79 @@ Pada Gambar 5, dapat dilihat bahwa pengguna paling banyak memberikan rating 4 pa
 ## Data Preparation
 - Melakukan pengecekan missing value pada all_books menggunakan fungsi isnull()
 
-![cek-all_books](https://user-images.githubusercontent.com/109077279/200176337-73ab935c-3076-41f9-8222-da5142f852c8.png)
+![cek-all_books](https://user-images.githubusercontent.com/109077279/200176488-f4dc5592-2745-4335-81af-57ad8910ffa8.png)
 
 Gambar 6. **Cek missing value pada all_books**
 
 Pada Gambar 6, terlihat bahwa tidak ada missing value pada setiap fitur.
 
-- 
+- Mengurutkan buku berdasarkan book_id kemudian memasukkannya ke dalam variabel fix_books, dapat dilihat pada Tabel 3. Data pada Tabel 3 memiliki jumlah data sebanyak 5976479 _rows_ × 5 _columns_
+
+Tabel 3. **Data pada fix_books**
+|         | user_id | book_id | rating |         authors |                                   title |
+|--------:|--------:|--------:|-------:|----------------:|----------------------------------------:|
+| 2174136 |   29300 |       1 |      4 | Suzanne Collins | The Hunger Games (The Hunger Games, #1) |
+|  433265 |    6590 |       1 |      3 | Suzanne Collins | The Hunger Games (The Hunger Games, #1) |
+| 1907014 |    7546 |       1 |      5 | Suzanne Collins | The Hunger Games (The Hunger Games, #1) |
+| 3743260 |   43484 |       1 |      1 | Suzanne Collins | The Hunger Games (The Hunger Games, #1) |
+| 1266846 |   18689 |       1 |      5 | Suzanne Collins | The Hunger Games (The Hunger Games, #1) |
+|   ...   |     ... |     ... |    ... |             ... |                                     ... |
+| 2366366 |   31293 |   10000 |      3 |     John Keegan |                     The First World War |
+| 3376022 |   12272 |   10000 |      4 |     John Keegan |                     The First World War |
+| 2811513 |   35330 |   10000 |      4 |     John Keegan |                     The First World War |
+| 4134364 |   46337 |   10000 |      5 |     John Keegan |                     The First World War |
+| 4047777 |   42537 |   10000 |      4 |     John Keegan |                     The First World War |
+
+- Mengecek berapa jumlah entri unik pada fix_books berdasarkan book_id dan diketahui bahwa jumlahnya adalah 10000
+- Mengecek kategori authors yang unik
+
+![data-authors](https://user-images.githubusercontent.com/109077279/200177448-a3b734cb-1f19-42e3-85e1-eb6d18b5979a.png)
+
+Gambar 7. **Authors**
+
+Pada Gambar 7, dapat dilihat beberapa nama penulis dengan tipe data object. Pada gambar hanya ditampilkan beberapa nama penulis karena terlalu banyaknya data pada authors.
+
+- Membuang data duplikat pada variabel preparation, sehingga tampilannya akan seperti pada Tabel 4. Data pada Tabel 4 memiliki jumlah data sebanyak 10000 _rows_ × 5 _columns_. Jumlah ini sudah berkurang cukup banyak dibandingkan data pada Tabel 3 karena sudah tidak ada duplikasi data berdasarkan book_id.
+
+Tabel 4. **Preparation**
+|         | user_id | book_id | rating |                     authors |                                             title |
+|--------:|--------:|--------:|-------:|----------------------------:|--------------------------------------------------:|
+| 2174136 |   29300 |       1 |      4 |             Suzanne Collins |           The Hunger Games (The Hunger Games, #1) |
+|  161112 |    3183 |       2 |      5 | J.K. Rowling, Mary GrandPré | Harry Potter and the Sorcerer's Stone (Harry P... |
+|  672652 |    5651 |       3 |      2 |             Stephenie Meyer |                           Twilight (Twilight, #1) |
+| 3350794 |   27109 |       4 |      5 |                  Harper Lee |                             To Kill a Mockingbird |
+|   4367  |     232 |       5 |      4 |         F. Scott Fitzgerald |                                  The Great Gatsby |
+|   ...   |     ... |     ... |    ... |                         ... |                                               ... |
+| 5289649 |    2543 |    9996 |      3 |               Ilona Andrews |                         Bayou Moon (The Edge, #2) |
+| 3101597 |   38254 |    9997 |      4 |              Robert A. Caro | Means of Ascent (The Years of Lyndon Johnson, #2) |
+|  403472 |    3056 |    9998 |      4 |             Patrick O'Brian |                             The Mauritius Command |
+| 3362996 |   12187 |    9999 |      5 |             Peggy Orenstein | Cinderella Ate My Daughter: Dispatches from th... |
+| 5637174 |   49007 |   10000 |      4 |                 John Keegan |                               The First World War |
+
+- Mengonversi data series ‘book_id’, 'authors', dan 'title' menjadi dalam bentuk list menggunakan fungsi tolist(). Output yang dihasilkan dapat dilihat pada Gambar 8.
+
+Gambar 8. **Hasil konversi data ke list**
+
+![tolist](https://user-images.githubusercontent.com/109077279/200178397-531c1ddb-f575-46fb-b385-1624569fdcb6.png)
+
+- Membuat dictionary untuk data ‘id_book’, ‘book_author’, dan ‘book_title’. Dictionary di simpan ke dalam variable books_news dapat dilihat pada Tabel 5.
+
+Tabel 5. **books_new**
+|      |    id |                                        book_title |                 book_author |
+|-----:|------:|--------------------------------------------------:|----------------------------:|
+|   0  |     1 |           The Hunger Games (The Hunger Games, #1) |             Suzanne Collins |
+|   1  |     2 | Harry Potter and the Sorcerer's Stone (Harry P... | J.K. Rowling, Mary GrandPré |
+|   2  |     3 |                           Twilight (Twilight, #1) |             Stephenie Meyer |
+|   3  |     4 |                             To Kill a Mockingbird |                  Harper Lee |
+|   4  |     5 |                                  The Great Gatsby |         F. Scott Fitzgerald |
+|  ... |   ... |                                               ... |                         ... |
+| 9995 |  9996 |                         Bayou Moon (The Edge, #2) |               Ilona Andrews |
+| 9996 |  9997 | Means of Ascent (The Years of Lyndon Johnson, #2) |              Robert A. Caro |
+| 9997 |  9998 |                             The Mauritius Command |             Patrick O'Brian |
+| 9998 |  9999 | Cinderella Ate My Daughter: Dispatches from th... |             Peggy Orenstein |
+| 9999 | 10000 |                               The First World War |                 John Keegan |
 
 
-
-Pada bagian ini Anda menerapkan dan menyebutkan teknik data preparation yang dilakukan. Teknik yang digunakan pada notebook dan laporan harus berurutan.
-
-**Rubrik/Kriteria Tambahan (Opsional)**: 
-- Menjelaskan proses data preparation yang dilakukan
-- Menjelaskan alasan mengapa diperlukan tahapan data preparation tersebut.
 
 ## Modeling
 Tahapan ini membahas mengenai model sisten rekomendasi yang Anda buat untuk menyelesaikan permasalahan. Sajikan top-N recommendation sebagai output.
