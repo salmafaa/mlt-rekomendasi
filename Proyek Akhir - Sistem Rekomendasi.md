@@ -71,7 +71,7 @@ Univariate Analyst adalah menganalisis setiap fitur secara terpisah.
 
 **Analisis setiap atribut pada dataset books**
 
-Berikut adalah isi data dari dataset books dapat dilihat pada Tabel 1
+Berikut adalah beberapa isi data dari dataset books dapat dilihat pada Tabel 1.
 
 Tabel 1. **Data books**
 |   | book_id |                     authors |                           original_title |                                             title | language_code |
@@ -84,9 +84,47 @@ Tabel 1. **Data books**
 
 
 ![Analyst-books](https://user-images.githubusercontent.com/109077279/200172546-b849fa59-f553-40cb-898a-735a84d232ff.png)
-Gambar 1. **Analyst dataset books**
+Gambar 1. **Analisis dataset books**
 
-Pada Gambar 1, 
+Pada Gambar 1, dapat dilihat jumlah entri unik dari setiap fitur pada dataset books. Terlihat bahwa banyaknya data penulis adalah 4664 dan banyaknya judul buku keseluruhan adalah 9964, artinya terdapat penulis yang menulis lebih dari satu buku.
+
+**Analisis setiap atribut pada dataset ratings**
+
+Berikut adalah beberapa isi dari dataset ratings dapat dilihat pada Tabel 2.
+
+Tabel 2. **Data ratings**
+|   | user_id | book_id | rating |   |
+|--:|--------:|--------:|-------:|---|
+| 0 |    0    |       1 |    258 | 5 |
+| 1 |    1    |       2 |   4081 | 4 |
+| 2 |    2    |       2 |    260 | 5 |
+| 3 |    3    |       2 |   9296 | 5 |
+| 4 |    4    |       2 |   2318 | 3 |
+
+
+![describe-rating](https://user-images.githubusercontent.com/109077279/200175098-adc24962-1231-4429-8279-76a3fd028012.png)
+
+Gambar 2. **Describe rating**
+
+Pada Gambar 2, terlihat bahwa nilai minimal dari rating adalah 1 dan maksimalnya adalah 5.
+
+![analyst-ratings](https://user-images.githubusercontent.com/109077279/200175196-1bd9fea9-a490-4340-848c-11b524bd2c4e.png)
+
+Gambar 3. **Analisis dataset rating**
+
+Pada Gambar 3, dapat dilihat jumlah entri unik pada fitur user_id dan book_id, serta jumlah keseluruhan rating yang diberikan oleh pengguna.
+
+![presentase-rating](https://user-images.githubusercontent.com/109077279/200175289-e74e2d20-1931-43f7-845c-fe50de297ca8.png)
+
+Gambar 4. **Presentase rating**
+
+Pada Gambar 4, terlihat jumlah pengguna yang memberi penilaian di setiap rating, Dapat dilihat bahwa pengguna paling banyak memberikan rating 4.
+
+![countplot-rating](https://user-images.githubusercontent.com/109077279/200175372-dff8199c-1d68-43f9-8f8e-53261209743d.png)
+
+Gambar 5. **Grafik rating**
+
+Pada Gambar 5, dapat dilihat bahwa pengguna paling banyak memberikan rating 4 pada buku, sesuai dengan jumlah dan presentase pada Gambar 4.
 
 
 ## Data Preparation
