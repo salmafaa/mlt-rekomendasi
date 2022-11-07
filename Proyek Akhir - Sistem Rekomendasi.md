@@ -13,14 +13,12 @@ Pengertian dari Sistem Rekomendasi sendiri adalah suatu _system_ yang digunakan 
 
 ### Problem Statements
 
-Menjelaskan pernyataan masalah:
 - Bagaimana pengguna dapat mendapatkan rekomendasi buku serupa?
 - Bagaimana membuat model rekomendasi berdasarkan kesamaan penulis (_author_)?
 - Bagaimana membuat model rekomendasi berdasarkan rating?
 
 ### Goals
 
-Menjelaskan tujuan proyek yang menjawab pernyataan masalah:
 - Membuat model _Machine learning_ sistem rekomendasi untuk menghasilkan rekomendasi buku serupa
 - Membuat model rekomendasi berdasarkan kesamaan penulis (_author_) dengan pendekatan Content Based Filtering
 - Membuat model rekomendasi berdasarkan rating dengan pendekatan Collaborative Filtering
@@ -231,49 +229,177 @@ TF-IDF atau _Term Frequency - Inverse Document Frequency_, adalah ukuran statist
 
 TF-IDF digunakan pada sistem rekomendasi buku untuk menentukan representasi fitur penting dari setiap fitur authors. Untuk menjalankan TF-IDF digunakan fungsi tfidfvectorizer() dari library sklearn.
 
-- Setelah inisialisasi tfidfvectorizer, lakukan perhitungan idf pada data authors kemudian mapping array dari fitur index integer ke fitur nama. Output pada tahap ini dapat dilihat pada Gambar 9. Pada Gambar tersebut hanya ditampilkan sebagian data karena terlalu banyaknya data jika ditampilkan seluruhnya.
+Setelah inisialisasi tfidfvectorizer, lakukan perhitungan idf pada data authors kemudian mapping array dari fitur index integer ke fitur nama. Output pada tahap ini dapat dilihat pada Gambar 9. Pada Gambar tersebut hanya ditampilkan sebagian data karena terlalu banyaknya data jika ditampilkan seluruhnya.
 
 Gambar 9. **Mapping array**
 
 ![mapping-array](https://user-images.githubusercontent.com/109077279/200288819-deba0886-cf81-42df-9df5-01e8756bcd33.png)
 
-- Selanjutkan lakukan fit lalu tranformasikan ke dalam bentuk matriks. Ukuran matriks dapat dilihat pada Gambar 10. Pada Gambar 10, nilai 10000 merupakan ukuran data dan 6193 merupakan matriks authors.
+Selanjutkan lakukan fit lalu tranformasikan ke dalam bentuk matriks. Ukuran matriks dapat dilihat pada Gambar 10. Pada Gambar 10, nilai 10000 merupakan ukuran data dan 6193 merupakan matriks authors.
 
 Gambar 10. **Ukuran makriks tfidf**
 
 ![ukuran matriks tfidf](https://user-images.githubusercontent.com/109077279/200289769-b7e5ba6c-7583-4a14-a07a-bf9aab7555e2.png)
 
-- Selanjutnya ubah vektor tf-idf dalam bentuk matriks dengan fungsi todense(). Output pada tahap ini dapat dilihat pada Gambar 11.
+Selanjutnya ubah vektor tf-idf dalam bentuk matriks dengan fungsi todense(). Output pada tahap ini dapat dilihat pada Gambar 11.
 
 Gambar 11. **matriks tf-idf**
 
 ![matriks-tfidf](https://user-images.githubusercontent.com/109077279/200292310-0203e237-efce-4e99-8fd0-61e5b5c97c02.png)
 
-- Membuat Dataframe untuk melihat tf-idf matriks. Dataframe baru dibuat untuk menunjukkan matriks TF-IDF untuk beberapa title dan authors. Semakin tinggi nilai matriks menunjukkan semakin erat hubungan antara title dengan authors tersebut. Dataframe dapat dilihat pada Gambar 12. Pada Gambar 12, hanya disajikan beberapa data dari keseluruhan data sehingga belum terlihat hubungan antara title dengan authors.
+Membuat Dataframe untuk melihat tf-idf matriks. Dataframe baru dibuat untuk menunjukkan matriks TF-IDF untuk beberapa title dan authors. Semakin tinggi nilai matriks menunjukkan semakin erat hubungan antara title dengan authors tersebut. Dataframe dapat dilihat pada Gambar 12. Pada Gambar 12, hanya disajikan beberapa data dari keseluruhan data sehingga belum terlihat hubungan antara title dengan authors.
 
 Gambar 12. **Dataframe matriks tf-idf**
 
 ![dataframe](https://user-images.githubusercontent.com/109077279/200292860-3535dc24-2726-448b-b0f4-7e872866b364.png)
 
+**Cosine Similarity**
+
+Cosine Similarity mengukur kesamaan antara dua vektor dan menentukan apakah kedua vektor menunjuk ke arah yang sama. Teknik ini bekerja dengan menghitung sudut cosinus antara dua vektor. Semakin kecil sudut cosinus antara dua vektor, semakin besar nilai kemiripan cosinusnya. Cosine Similarity dapat dilihat pada Gambar 13.
+
+Gambar 13. **Cosine Similarity**
+
+![cosine-similarity](https://user-images.githubusercontent.com/109077279/200303110-2d1d3baf-3f1d-4fa8-b37b-057136dc89de.png)
+
+Cosine similarity digunakan untuk menghitung derajat kesamaan antar judul buku. Untuk menjalankan cosine similarity digunakan fungsi cosine_similarity dari library sklearn. Output menghitung cosine similarity pada matriks tf-idf dapat dilihat pada Gambar 14.
+
+Gambar 14. **Cosine similarity pada matriks tf-idf**
+
+![cosine-similarity-matriks](https://user-images.githubusercontent.com/109077279/200304127-4a636820-6d4a-404c-8af3-60511f01498f.png)
+
+Selanjutnya membuat dataframe dari variable cosine_sim (variable yang menyimpan perhitungan cosine similarity pada matriks tf-idf) dengan baris dan kolom berupa judul - judul buku. Dataframe dapat dilihat pada Gambar 15. Pada Gambar 15, hanya ditampilkan beberapa data sehingga belum terlihat kesamaan.
+
+Gambar 15. **Dataframe matriks**
+
+![cosine-similarity-dataframe](https://user-images.githubusercontent.com/109077279/200305354-8c706e9f-1183-498d-82b6-65f78260c76f.png)
+
+### Result
+
+Fungsi books_recommendations dibuat untuk menemukan rekomendasi buku menggunakan similarity yang telah didefinisikan sebelumnya. Fungsi ini bekerja dengan cara mengambil buku dengan similarity terbesar dari index yang ada.
+
+Selanjutnya adalah menemukan rekomendasi yang mirip dengan buku pada Tabel 6.
+
+Tabel 6. **Suzanne Collins**
+
+|   | id |                              book_title |     book_author |
+|--:|---:|----------------------------------------:|----------------:|
+| 0 |  1 | The Hunger Games (The Hunger Games, #1) | Suzanne Collins |
+
+Berikut top 5 rekomendasi dapat dilihat pada Tabel 7. Pada Tabel 7, terlihat bahwa 5 rekomendasi teratas memiliki kesamaan penulis yaitu Suzanne Collins.
+
+Tabel 7. **5 Rekomendasi teratas**
+|   |                                        book_title |     book_author |
+|--:|--------------------------------------------------:|----------------:|
+| 0 |                 Mockingjay (The Hunger Games, #3) | Suzanne Collins |
+| 1 | The Hunger Games Trilogy Boxset (The Hunger Ga... | Suzanne Collins |
+| 2 | Gregor and the Marks of Secret (Underland Chro... | Suzanne Collins |
+| 3 | Gregor and the Code of Claw (Underland Chronic... | Suzanne Collins |
+| 4 | Gregor and the Prophecy of Bane (Underland Chr... | Suzanne Collins |
+
+**Kelebihan :**
+- Tidak tergantung pada user lain karena mampu merekomendasikan item yang belum dinilai oleh pengguna lain
+- Memunculkan item yang relevan dengan kegiatan pengguna di masa lalu
+
+**Kekurangan :**
+- Memiliki keterbatasan dalam jenis fitur terkait
+- Sistem tidak akan memberikan rekomendasi yang dapat diandalkan pada pengguna baru, karena membutuhkan penelurusan atau data pada preferensi pengguna
 
 ### Collaborative Filtering
 
+Sistem rekomendasi yang dibangun pada proyek ini adalah sistem rekomendasi berdasarkan rating yang diberikan oleh pengguna dengan pendekatan collaborative filtering. Collaborative Filtering adalah algoritma yang bergantung pada pendapat komunitas pengguna. Dia tidak memerlukan atribut untuk setiap itemnya.
 
-Tahapan ini membahas mengenai model sisten rekomendasi yang Anda buat untuk menyelesaikan permasalahan. Sajikan top-N recommendation sebagai output.
+**Membagi Data untuk Training dan Validasi**
 
-**Rubrik/Kriteria Tambahan (Opsional)**: 
-- Menyajikan dua solusi rekomendasi dengan algoritma yang berbeda.
-- Menjelaskan kelebihan dan kekurangan dari solusi/pendekatan yang dipilih.
+Sebelum membagi data, acak data terlebih dahulu agar distribusinya menjadi random. Hasil mengacak dataset dapat dilihat pada Tabel 8. Pada Tabel 8, dapat dilihat beberapa isi data yang telah diacak. Keseluruhan tabel memiliki jumlah 5976479 _rows_ × 5 _columns_
+
+Tabel 8. **Dataset acak**
+|         | user_id | book_id | rating |  user | books |
+|--------:|--------:|--------:|-------:|------:|------:|
+| 3623535 |   42562 |    2757 |    3.0 | 39510 |   777 |
+| 3985638 |   43232 |     134 |    4.0 | 40292 |  5862 |
+| 2983642 |   37244 |    1463 |    5.0 | 33569 |  3222 |
+| 5812251 |   53366 |      71 |    2.0 | 52456 |   179 |
+| 2208852 |   29634 |    3339 |    4.0 | 25709 |  6783 |
+|   ...   |     ... |     ... |    ... |   ... |   ... |
+| 1570006 |   22331 |    2621 |    5.0 | 18788 |   296 |
+| 2234489 |   26562 |    8110 |    5.0 | 22690 |  8225 |
+| 4926484 |   51127 |     125 |    4.0 | 49766 |   484 |
+| 4304572 |   10933 |    1752 |    4.0 |  8854 |   232 |
+| 1692743 |   10327 |     445 |    4.0 | 14110 |  7444 |
+
+
+Selanjutnya memetakan (mapping) data user dan buku menjadi satu value terlebih dahulu. Lalu, membuat rating dalam skala 0 sampai 1 agar mudah dalam melakukan proses training. Kemudian bagi data menjadi 80% data train dan 20% data validasi. Output untuk tahap ini dapat dilihat pada Gambar 16.
+
+Gambar 16. **Membagi data**
+
+![Membagi data](https://user-images.githubusercontent.com/109077279/200310963-417969fd-a3b2-4114-8eff-0f7a3b39814a.png)
+
+
+**Proses Training**
+
+Membuat class RecommenderNet dengan keras Model class. Pada tahap ini, model menghitung skor kecocokan dengan teknik embedding. Pertama, lakukan proses embbeding terhadap user dan books. Selanjutnya, lakukan operasi perkalian dot product antara embedding user dan books. Selain itu, dapat menambahkan bias untuk setiap user dan books. Skor kecocokan ditetapkan dalam skala [0,1] dengan fungsi altivasi sigmoid.
+
+Selanjutnya, lakukan proses compile terhadap model. Model ini menggunakan Binary Crossentropy untuk menghitung loss function, Adam (Adaptive Moment Estimation) sebagai optimizer, dan RMSE sebagai metrics evaluation. Output hasil training dapat dilihat pada Gambar 17.
+
+Gambar 17. **Hasil training**
+
+![hasil training](https://user-images.githubusercontent.com/109077279/200313564-1d48e907-db54-4e52-8c0d-b25a5f4ef438.png)
+
+### Result
+
+Untuk memperoleh rekomendasi buku, gunakan fungsi model.predict() dari library Keras. Berikut adalah 10 Hasil Rekomendasi berdasarkan rating dapat dilihat pada Gambar 18. Pada Gambar 18, dapat dilihat bahwa terdapat satu buku dengan penulis yang sama, yaitu Judith McNaught. 
+
+Gambar 18. **10 Rekomendasi buku**
+
+![10 rekomendasi berdasarkan rating](https://user-images.githubusercontent.com/109077279/200316064-03cbe0ad-5269-400a-aef8-e51ebb6d5851.png)
+
+**Kelebihan :**
+- Rekomedasi tetap akan bekerja dalam keadaan konten sulit dianalisis sekalipun
+
+**Kekurangan :**
+- Membutuhkan parameter rating, sehingga jika ada item baru sistem tidak akan merekomendasikan item tersebut
 
 ## Evaluation
-Pada bagian ini Anda perlu menyebutkan metrik evaluasi yang digunakan. Kemudian, jelaskan hasil proyek berdasarkan metrik evaluasi tersebut.
 
-Ingatlah, metrik evaluasi yang digunakan harus sesuai dengan konteks data, problem statement, dan solusi yang diinginkan.
+### Content Based Filtering
 
-**Rubrik/Kriteria Tambahan (Opsional)**: 
-- Menjelaskan formula metrik dan bagaimana metrik tersebut bekerja.
+Teknik Evaluasi yang digunakan adalah precision. Precision dapat diartikan sebagai derajat reliabilitas model ketika ia memberikan prediksi “Positif”. Rumus dari teknik ini adalah :
+
+Recommender system precision :  
+
+$$ P =  { of-our-recommendations-that-are-relevant \over of-items-we-recommended} $$  
+
+Dari hasil rekomendasi pada Tabel 6 sebelumnya, diketahui bahwa buku dengan judul The Hunger Games (The Hunger Games, #1) ditulis oleh Suzanne Collins. Dari 5 buku yang direkomendasikan pada Tabel 7, 5 buku memiliki kesamaan penulis, yaitu Suzanne Collins. Artinya, precision sistem sebesar 5/5 atau 100%.
+
+
+### Collaborative Filtering
+
+Evaluasi metrik yang digunakan untuk mengukur kinerja model adalah metrik RMSE (Root Mean Squared Error).
+
+RMSE adalah metode pengukuran dengan mengukur perbedaan nilai dari prediksi sebuah model sebagai estimasi atas nilai yang diobservasi. Root Mean Square Error adalah hasil dari akar kuadrat Mean Square Error. Keakuratan metode estimasi kesalahan pengukuran ditandai dengan adanya nilai RMSE yang kecil. Metode estimasi yang mempunyai Root Mean Square Error (RMSE) lebih kecil dikatakan lebih akurat daripada metode estimasi yang mempunyai Root Mean Square Error (RMSE) lebih besar
+
+formula dari matriks RMSE adalah sebagai berikut.
+
+$$ RMSE = { \sqrt { Σ_{t}^{n} (A_{t} - F_{t})^2 } \over n} $$
+
+keterangan :
+
+At : Nilai Aktual.
+
+ft = Nilai hasil peramalan.
+
+N = banyaknya dataset
+
+Cara menerapkan metrik tersebut adalah dengan menambahkan 'metrics=[tf.keras.metrics.RootMeanSquaredError()]' pada model.compile. Hasil dari model evaluasi visualisasi matriks dapat dilihat pada Gambar 19. Pada Gambar 19, terlihat bahwa terjadi kenaikan pada model, namun nilai akhir masih di bawah 0.5, yaitu root_mean_squared_error: 0.4160 dan val_root_mean_squared_error: 0.3842. 
+
+Gambar 19. **Visualisasi Matriks**
+
+![model matriks](https://user-images.githubusercontent.com/109077279/200329600-24476e45-352d-48bc-ada9-7e75fa59eab5.png)
+
 
 # Conclusion
+
+Proyek _Machine Learning_ sistem rekomendasi dibuat untuk membantu dalam memudahkan pengguna agar mendapat rekomendasi buku yang memiliki kemipiran dengan buku yang telah dibaca sebelumnya, maka dibuatlah model dengan pendekatan Content Based Filtering, yang membuat model rekomendasi dapat memunculkan rekomendasi buku sesuai kesamaan pada penulis buku tersebut dan model dengan pendekatan Collaborative Filtering, yang membuat model dapat memunculkan rekomendasi buku berdasarkan rating yang diberikan pengguna. Dengan adanya model sistem rekomendasi dengan kedua pendekatan tersebut, maka user dapat mendapatkan rekomendasi buku yang sesuai.
 
 
 # REFERENCE
