@@ -214,11 +214,51 @@ Tabel 5. **books_new**
 
 ### Data Preparation pada Collaborative Filtering
 
+- Mengubah fitur 'user_id' dan 'book_id' menjadi list tanpa nilai yang sama.
 - Menyandikan (encode) fitur 'user_id' dan 'book_id' ke dalam indeks integer.
-- Memetakan 'user_id' dan 'book_id' ke dataframe yang berkaitan.
+- Memetakan (mapping) 'user_id' dan 'book_id' ke dataframe yang berkaitan.
 - Mengecek jumlah user, jumlah buku, kemudian mengubah nilai rating menjadi float.
 
-## Modeling
+## Modeling and Result
+
+### Content Based Filtering
+
+Sistem rekomendasi yang dibangun pada proyek ini adalah sistem rekomendasi sederhana berdasarkan kesamaan nama penulis dengan mendekatan content based filtering. Content Based Filtering adalah algoritma yang merekomendasikan item serupa dengan apa yang disukai pengguna, berdasarkan tindakan mereka sebelumnya atau umpan balik eksplisit. 
+
+**TF-IDF**
+
+TF-IDF atau _Term Frequency - Inverse Document Frequency_, adalah ukuran statistik yang menggambarkan pentingnya istilah dalam dokumen dalam kumpulan atau korpus. Metrik ini biasanya digunakan sebagai faktor pembobotan untuk pencarian informasi, penambangan teks, dan pemodelan pengguna. Nilai TF-IDF meningkat secara linier dengan jumlah kemunculan suatu term dan bergantung pada jumlah dokumen dalam korpus yang memuat term tersebut.
+
+TF-IDF digunakan pada sistem rekomendasi buku untuk menentukan representasi fitur penting dari setiap fitur authors. Untuk menjalankan TF-IDF digunakan fungsi tfidfvectorizer() dari library sklearn.
+
+- Setelah inisialisasi tfidfvectorizer, lakukan perhitungan idf pada data authors kemudian mapping array dari fitur index integer ke fitur nama. Output pada tahap ini dapat dilihat pada Gambar 9. Pada Gambar tersebut hanya ditampilkan sebagian data karena terlalu banyaknya data jika ditampilkan seluruhnya.
+
+Gambar 9. **Mapping array**
+
+![mapping-array](https://user-images.githubusercontent.com/109077279/200288819-deba0886-cf81-42df-9df5-01e8756bcd33.png)
+
+- Selanjutkan lakukan fit lalu tranformasikan ke dalam bentuk matriks. Ukuran matriks dapat dilihat pada Gambar 10. Pada Gambar 10, nilai 10000 merupakan ukuran data dan 6193 merupakan matriks authors.
+
+Gambar 10. **Ukuran makriks tfidf**
+
+![ukuran matriks tfidf](https://user-images.githubusercontent.com/109077279/200289769-b7e5ba6c-7583-4a14-a07a-bf9aab7555e2.png)
+
+- Selanjutnya ubah vektor tf-idf dalam bentuk matriks dengan fungsi todense(). Output pada tahap ini dapat dilihat pada Gambar 11.
+
+Gambar 11. **matriks tf-idf**
+
+![matriks-tfidf](https://user-images.githubusercontent.com/109077279/200292310-0203e237-efce-4e99-8fd0-61e5b5c97c02.png)
+
+- Membuat Dataframe untuk melihat tf-idf matriks. Dataframe baru dibuat untuk menunjukkan matriks TF-IDF untuk beberapa title dan authors. Semakin tinggi nilai matriks menunjukkan semakin erat hubungan antara title dengan authors tersebut. Dataframe dapat dilihat pada Gambar 12. Pada Gambar 12, hanya disajikan beberapa data dari keseluruhan data sehingga belum terlihat hubungan antara title dengan authors.
+
+Gambar 12. **Dataframe matriks tf-idf**
+
+![dataframe](https://user-images.githubusercontent.com/109077279/200292860-3535dc24-2726-448b-b0f4-7e872866b364.png)
+
+
+### Collaborative Filtering
+
+
 Tahapan ini membahas mengenai model sisten rekomendasi yang Anda buat untuk menyelesaikan permasalahan. Sajikan top-N recommendation sebagai output.
 
 **Rubrik/Kriteria Tambahan (Opsional)**: 
